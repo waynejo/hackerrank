@@ -21,9 +21,9 @@ object Solution {
         }
     }
 
-    def generatePairMap(pairs: List[Array[Int]], acc: Array[Int], sums: HashMap[Int, Int]): BigInt = {
+    def generatePairMap(pairs: List[Array[Int]], acc: Array[Int], sums: HashMap[Int, Int]): Long = {
         if (pairs.isEmpty) {
-            ((BigInt(0), sums, acc.length) /: sums.keys){case ((answer, remains, others), key) =>
+            ((0, sums, acc.length) /: sums.keys){case ((answer, remains, others), key) =>
                 val value = remains(key)
                 val nextHash = remains - key
                 (answer + value * (others - value), nextHash, others - value)
@@ -47,7 +47,7 @@ object Solution {
         }
     }
 
-    def journeyToMoon(n: Int, astronaut: Array[Array[Int]]): BigInt = {
+    def journeyToMoon(n: Int, astronaut: Array[Array[Int]]): Long = {
         val range = 0 until n
         val initialSums = (HashMap[Int, Int]() /: range)((acc, x) => acc.updated(x, 1))
         generatePairMap(astronaut.toList, range.toArray, initialSums)
